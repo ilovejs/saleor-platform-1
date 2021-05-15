@@ -26,7 +26,7 @@ services:
     environment:
       - STOREFRONT_URL=http://localhost:3000/
       - DASHBOARD_URL=http://localhost:9000/
-      - ALLOWED_HOSTS=194.195.254.71
+      - ALLOWED_HOSTS=194.195.254.71,localhost
 
   storefront:
     build:
@@ -44,8 +44,9 @@ services:
     build:
       context: ./saleor-dashboard
       dockerfile: ./Dockerfile
+    image: saleor-admin
     ports:
-      - 9000:9000
+      - 9000:9001
     restart: unless-stopped
     volumes:
       - ./saleor-dashboard/:/app:cached

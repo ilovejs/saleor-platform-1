@@ -1,19 +1,52 @@
-# notes
+### Version 2.11.0
 
-- probably individually
-  - with new production version of Dockerfile
-docker build
+saleor @ 3b31391
 
-- with ENV in compose
+saleor-dashboard @ 8bcb8b7
+  [node10] 12 will break it
+
+saleor-storefront @ 3ba4ffa
+  [mjs](https://github.com/graphql/graphql-js/issues/1272)
+  @saleor/sdk@0.1.5 => require node 12
+  >> you should change package.json for storefront !!
+
+### Deploy API
+docker volume ls
+docker volume prune
+
+#### making sure migration can run
+Creating network "saleor-platform_default" with the default driver
+Creating network "saleor-platform_saleor-backend-tier" with driver "bridge"
+Creating volume "saleor-platform_saleor-db" with local driver
+Creating volume "saleor-platform_saleor-redis" with local driver
+Creating volume "saleor-platform_saleor-media" with default driver
+Creating saleor-platform_redis_1 ... done
+Creating saleor-platform_db_1    ... done
+Creating saleor-platform_api_1   ... done
+
+### run man !
 docker-compose up -d api
 
-- view
+docker build
+docker-compose up -d api
+docker-compose down
+
+#### when migrate, bash windows should have something !!
+docker-compose run --rm api python3 manage.py migrate
+docker-compose run --rm api python3 manage.py collectstatic --noinput
+docker-compose run --rm api python3 manage.py populatedb --createsuperuser
+
 docker ps -al
 
-- api runs gunicorn
-  view http://194.195.254.71:8000/graphql/
+- test
+view http://194.195.254.71:8000/graphql/
+     http://localhost:8000/graphql/
 
-# docker build
+### file system watch limit
+
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+#### docker build
 
 ```sh
 docker images
@@ -27,12 +60,48 @@ mailhog/mailhog
 node
 redis
 
-# 325s
-cd saleor-dashboard/
-docker build -t saleor-platform_dashboard .
-
-
+# 325s in vpc 1cpu
+# 123s in local yarn
 ```
+# Build amin
+  
+1. Remove node requirement  
+  "engines": {
+    "node": ">=12.12.0",
+    "npm": ">=6.11.0"
+  },
+
+2. Build Admin on powerful computer:
+
+  cd saleor-dashboard/
+  API_URI=http://localhost:8000/graphql/ yarn build
+  docker build -t saleor-admin .
+  docker push 
+
+3. NOT WORKING ?!!
+
+cd .. && rm -rf saleor-dashboard
+gcl https://github.com/mirumee/saleor-dashboard
+
+docker build -t saleor-admin .
+
+docker-compose stop dashboard
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # saleor-platform
 
@@ -180,11 +249,5 @@ Some situations do call for extra code; we can cover exotic use cases or build y
 
 hello@mirumee.com
 
-### Version 2.11.0
 
-saleor @ 3b31391
-
-saleor-dashboard @ 8bcb8b7
-
-saleor-storefront @ 3ba4ffa
 
