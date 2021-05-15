@@ -1,4 +1,41 @@
+# notes
+
+- probably individually
+  - with new production version of Dockerfile
+docker build
+
+- with ENV in compose
+docker-compose up -d api
+
+- view
+docker ps -al
+
+- api runs gunicorn
+  view http://194.195.254.71:8000/graphql/
+
+# docker build
+
+```sh
+docker images
+
+saleor-platform_api
+saleor-platform_worker
+saleor-platform_dashboard
+saleor-platform_storefront
+
+mailhog/mailhog
+node
+redis
+
+# 325s
+cd saleor-dashboard/
+docker build -t saleor-platform_dashboard .
+
+
+```
+
 # saleor-platform
+
 All Saleor services started from a single repository
 
 *Keep in mind this repository is for local development only and is not meant to be deployed on any production environment! If you're not a developer and just want to try out Saleor you can check our [live demo](https://demo.saleor.io/).*
@@ -142,3 +179,12 @@ Some situations do call for extra code; we can cover exotic use cases or build y
 #### Crafted with ❤️ by [Mirumee Software](http://mirumee.com)
 
 hello@mirumee.com
+
+### Version 2.11.0
+
+saleor @ 3b31391
+
+saleor-dashboard @ 8bcb8b7
+
+saleor-storefront @ 3ba4ffa
+
