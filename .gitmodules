@@ -5,3 +5,7 @@
 	path = saleor
 	url = https://github.com/ilovejs/saleor
 	branch = milestone-1
+[submodule "saleor-storefront"]
+	path = saleor-storefront
+	url = https://github.com/ilovejs/saleor-storefront
+	branch = 2.11.0.fix1

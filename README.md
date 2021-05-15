@@ -255,5 +255,10 @@ https://stackoverflow.com/questions/20929336/git-submodule-add-a-git-directory-i
 
 rm -rf .git/modules/saleor
 
+git rm --cached -r saleor-storefront
+
 git submodule add -b milestone-1 https://github.com/ilovejs/saleor
+
+git submodule add -b 2.11.0.fix1 https://github.com/ilovejs/saleor-storefront
+
 
