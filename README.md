@@ -249,5 +249,11 @@ Some situations do call for extra code; we can cover exotic use cases or build y
 
 hello@mirumee.com
 
+## Git Submodule
 
+https://stackoverflow.com/questions/20929336/git-submodule-add-a-git-directory-is-found-locally-issue
+
+rm -rf .git/modules/saleor
+
+git submodule add -b milestone-1 https://github.com/ilovejs/saleor
 
