@@ -28,6 +28,7 @@ docker volume prune
 docker system prune -a
 docker images
 
+- with ENV in compose
 docker-compose up -d api
 
 To rebuild this image `docker-compose build` or `docker-compose up --build`.
@@ -58,13 +59,26 @@ http://194.195.254.71:8000/graphql/
 
   dk push ilovejs/api:latest
 
-**storefront**
+**push Local storefront**
 
 dk push ilovejs/storefront -a
 
 docker pull ilovejs/storefront:2.10
 
 docker run -p 3000:80 ilovejs/storefront:2.10
+
+**deploy & test Remote storefront**
+
+docker-compose up -d storefront
+docker-compose stop storefront
+
+http://194.195.254.71:3000/
+
+- view
+docker ps -al
+
+- api runs gunicorn
+  view http://194.195.254.71:8000/graphql/
 
 **dashboard**
 

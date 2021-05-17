@@ -81,16 +81,17 @@ services:
       - ALLOWED_HOSTS=194.195.254.71,localhost
 
   storefront:
-    build:
-      context: ./saleor-storefront
-      dockerfile: ./Dockerfile
+    image: ilovejs/storefront:2.10
+    ## comment to skip build
+    # build:
+      # context: ./saleor-storefront
+      # dockerfile: ./Dockerfile
     ports:
-      - 3000:3000
+      - 3000:80
     restart: unless-stopped
     volumes:
       - ./saleor-storefront/:/app:cached
-      - /app/node_modules/
-    #command: npm start -- --hostname 0.0.0.0
+      - /app/node_modules/   
 
   dashboard:
     build:
@@ -103,7 +104,6 @@ services:
     volumes:
       - ./saleor-dashboard/:/app:cached
       - /app/node_modules/
-    #command: npm start -- --host 0.0.0.0
 
 volumes:
   saleor-db:
