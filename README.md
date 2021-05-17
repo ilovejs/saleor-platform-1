@@ -82,6 +82,28 @@ docker ps -al
 
 **dashboard**
 
+dk build -t dashboard:2.10 .
+dk images
+
+dk tag dashboard:2.10 ilovejs/dashboard:2.10
+
+dk push ilovejs/dashboard -a
+
+docker run -p 9000:80 ilovejs/dashboard:2.10
+
+> create user to login
+
+docker-compose run --rm api python3 manage.py populatedb --createsuperuser
+
+> login http://localhost:9000/
+
+admin@example / admin
+
+> run local
+
+docker-compose up -d dashboard
+docker-compose stop dashboard
+
 ## remote deploy by docker
 
 https://cloud.linode.com/linodes/
@@ -187,21 +209,6 @@ docker-compose stop dashboard
 * file system watch limit
 
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # saleor-platform
 

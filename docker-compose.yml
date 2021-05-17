@@ -94,12 +94,12 @@ services:
       - /app/node_modules/   
 
   dashboard:
-    build:
-      context: ./saleor-dashboard
-      dockerfile: ./Dockerfile
-    # image: saleor-admin
+    # build:
+    #   context: ./saleor-dashboard
+    #   dockerfile: ./Dockerfile
+    image: ilovejs/dashboard:2.10
     ports:
-      - 9000:9000
+      - 9000:80
     restart: unless-stopped
     volumes:
       - ./saleor-dashboard/:/app:cached
