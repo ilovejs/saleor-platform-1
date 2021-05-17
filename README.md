@@ -1,7 +1,18 @@
-### Version 2.11.0
+## Release
 
-saleor @ 3b31391
+Use submerge under Linux, 
 
+Add real remote from official, fetch, stage local, pull to local branch
+
+coding...
+
+git push -u origin 2.10
+
+## Version
+
+saleor @ 3b31391    == 2.11.0 official
+  milestone-1 released on 4th Nov 2020, not match dashboard version
+  
 saleor-dashboard @ 8bcb8b7
   [node10] 12 will break it
 
@@ -10,9 +21,86 @@ saleor-storefront @ 3ba4ffa
   @saleor/sdk@0.1.5 => require node 12
   >> you should change package.json for storefront !!
 
-### Deploy API
+## Local deploy API
+
 docker volume ls
 docker volume prune
+docker system prune -a
+docker images
+
+docker-compose up -d api
+
+To rebuild this image `docker-compose build` or `docker-compose up --build`.
+* run migration
+* visit http://localhost:8000/
+
+http://194.195.254.71:8000/graphql/
+
+```graphql
+{
+  "data": {
+    "shop": {
+      "name": "Saleor e-commerce"
+    }
+  }
+}
+```
+
+## push docker
+
+**api**
+
+  create public repo on 
+
+    https://hub.docker.com/repository/docker/ilovejs/api
+
+  dk tag saleor-platform_api:latest ilovejs/api:latest
+
+  dk push ilovejs/api:latest
+
+**storefront**
+
+dk push ilovejs/storefront -a
+
+docker pull ilovejs/storefront:2.10
+
+docker run -p 3000:80 ilovejs/storefront:2.10
+
+**dashboard**
+
+## remote deploy by docker
+
+https://cloud.linode.com/linodes/
+
+ssh root@194.195.254.71
+
+## inside vpc
+
+top
+cd app/saleor-platform && docker-compose down
+
+docker system prune -a
+
+> neccessary
+docker volume prune
+
+docker pull ilovejs/api
+
+** too much uWsi worker **
+
+vim docker-compose.yml 
+
+docker-compose run -d api
+
+docker images
+docker ps
+
+> migration
+docker-compose run --rm api pip3 install pytimeparse
+docker-compose run --rm api python3 manage.py migrate
+
+http://194.195.254.71:8000/graphql/
+
 
 #### making sure migration can run
 Creating network "saleor-platform_default" with the default driver
@@ -24,7 +112,7 @@ Creating saleor-platform_redis_1 ... done
 Creating saleor-platform_db_1    ... done
 Creating saleor-platform_api_1   ... done
 
-### run man !
+### dev run !
 docker-compose up -d api
 
 docker build
@@ -42,14 +130,8 @@ docker ps -al
 view http://194.195.254.71:8000/graphql/
      http://localhost:8000/graphql/
 
-### file system watch limit
 
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
-#### docker build
-
-```sh
-docker images
+### docker images
 
 saleor-platform_api
 saleor-platform_worker
@@ -60,9 +142,7 @@ mailhog/mailhog
 node
 redis
 
-# 325s in vpc 1cpu
-# 123s in local yarn
-```
+
 # Build amin
   
 1. Remove node requirement  
@@ -87,6 +167,12 @@ docker build -t saleor-admin .
 
 docker-compose stop dashboard
 
+
+## issues
+
+* file system watch limit
+
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
 
 
