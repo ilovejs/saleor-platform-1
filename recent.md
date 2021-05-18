@@ -28,6 +28,8 @@ https://www.name.com/account/domain/details/tuner.games
 
 # self sign (optoinal)
 
+[todo] firewall
+
 [run-through](https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04)
 
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \

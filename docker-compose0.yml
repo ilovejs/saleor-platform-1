@@ -43,18 +43,14 @@ services:
     restart: unless-stopped
     networks:
       - saleor-backend-tier
-    environment:
-      - DATABASE_URL=postgres://saleor:saleor@db/saleor
-      - CELERY_BROKER_URL=redis://redis:6379/1
-      - SECRET_KEY=iamilovejs12
-      - EMAIL_URL=smtp://mailhog:1025
-      - DEFAULT_FROM_EMAIL=noreply@tuner.games
+    env_file: common.env
     depends_on:
       - redis
       - mailhog
     volumes:
       - ./saleor/saleor/:/app/saleor:Z,cached
       - ./saleor/templates/:/app/templates:Z,cached
+      # shared volume between worker and api for media
       - saleor-media:/app/media
             
   api:
@@ -75,19 +71,21 @@ services:
       - ./saleor/saleor/:/app/saleor:Z
       - ./saleor/templates/:/app/templates:Z
       - ./saleor/tests/:/app/tests
+      # shared volume between worker and api for media
       - saleor-media:/app/media
+    # command: python manage.py runserver 0.0.0.0:8000
+    env_file: common.env
     environment:
-      - STOREFRONT_URL=http://194.195.252.175:3000/
-      - DASHBOARD_URL=http://194.195.252.175:9000/
-      - ALLOWED_HOSTS=localhost,194.195.252.175
-      - DATABASE_URL=postgres://saleor:saleor@db/saleor
-      - CELERY_BROKER_URL=redis://redis:6379/1
-      - SECRET_KEY=iamilovejs12
-      - EMAIL_URL=smtp://mailhog:1025
-      - DEFAULT_FROM_EMAIL=noreply@tuner.games
+      - STOREFRONT_URL=http://localhost:3000/
+      - DASHBOARD_URL=http://localhost:9000/
+      - ALLOWED_HOSTS=194.195.254.71,localhost
 
   storefront:
     image: ilovejs/storefront:2.10
+    ## comment to skip build
+    # build:
+      # context: ./saleor-storefront
+      # dockerfile: ./Dockerfile
     ports:
       - 3000:80
     restart: unless-stopped
@@ -96,6 +94,9 @@ services:
       - /app/node_modules/   
 
   dashboard:
+    # build:
+    #   context: ./saleor-dashboard
+    #   dockerfile: ./Dockerfile
     image: ilovejs/dashboard:2.10
     ports:
       - 9000:80
