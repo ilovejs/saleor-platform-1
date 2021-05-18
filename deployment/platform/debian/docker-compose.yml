@@ -86,7 +86,6 @@ services:
       - EMAIL_URL=smtp://mailhog:1025
       - DEFAULT_FROM_EMAIL=noreply@tuner.games
 
-
   storefront:
     image: ilovejs/storefront:2.10
     ports:
