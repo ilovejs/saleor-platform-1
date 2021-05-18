@@ -13,6 +13,7 @@ git log
 docker-compose pull
 
 > debug redis error when docker-compose not detached
+
 docker exec -it redis:5.0-alpine ash
 
 docker exec -it ecfee8897901 ash
@@ -26,3 +27,10 @@ docker-compose run --rm api python3 manage.py populatedb --createsuperuser
 > view
 
 http://194.195.252.175:8000/graphql/
+
+> when change BE code, should see docker building process
+
+docker ps
+docker rmi app_api
+docker-compose up
+

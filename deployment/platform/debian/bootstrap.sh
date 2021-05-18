@@ -29,8 +29,6 @@ npm install -g yarn
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-
-
 # commit 81c12c7daf53dc56be7d67012309ba35712b0611 (HEAD -> 2.10, tag: 2.10.2, origin/2.10)
 # Author: Marcin G<C4><99>bala <maarcin.gebala@gmail.com>
 # Date:   Wed Jul 22 16:35:48 2020 +0200
