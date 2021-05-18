@@ -103,6 +103,8 @@ server {
 
 Congratulations! You have successfully enabled https://api.tuner.games
 
+`sudo certbot --nginx`
+
 You should test your configuration at:
 https://www.ssllabs.com/ssltest/analyze.html?d=api.tuner.games
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
