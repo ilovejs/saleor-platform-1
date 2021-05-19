@@ -146,10 +146,6 @@ https://stackoverflow.com/questions/32400933/how-can-i-list-all-vhosts-in-nginx
 
 # s3
 
-[user](tuner-dev1)
-AKIA6AWICF26L4JPYV54
-hyF9hEKSPN7Xe/VuEKC2wTTBeeeypMi1PPqvy37K
-
 https://docs.saleor.io/docs/developer/running-saleor/s3
 https://github.com/adamchainz/django-cors-headers
 https://stackoverflow.com/questions/35760943/how-can-i-enable-cors-on-django-rest-framework
