@@ -1,16 +1,23 @@
 #!/bin/sh
 
 # copy nginx conf
-
 scp -r ./saleor-dashboard/nginx/default.conf     root@194.195.252.175:/etc/nginx/sites-available/dashboard
-
 scp -r ./saleor-storefront/nginx/default.conf    root@194.195.252.175:/etc/nginx/sites-available/store
 
 # copy src files
+ssh root@194.195.252.175 'rm /var/www/dashboard.tuner.games/*'
+cd saleor-dashboard
+yarn clean
+yarn build
+scp -r ./build/dashboard/*     root@194.195.252.175:/var/www/dashboard.tuner.games/
+cd -
 
-scp -r ./saleor-dashboard/build/dashboard/*     root@194.195.252.175:/var/www/dashboard.tuner.games/
-
-scp -r ./saleor-storefront/dist/*               root@194.195.252.175:/var/www/store.tuner.games/
+ssh root@194.195.252.175 'rm /var/www/store.tuner.games/*'
+cd saleor-storefront
+yarn clean
+yarn build
+scp -r ./dist/*    root@194.195.252.175:/var/www/store.tuner.games/
+cd -
 
 # on remote
 # mkdir /var/www/dashboard.tuner.games

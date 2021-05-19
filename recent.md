@@ -132,3 +132,35 @@ https://www.ssllabs.com/ssltest/analyze.html?d=api.tuner.games
 
 	`scp -r root@194.195.252.175:/etc/letsencrypt ./certs`
 
+## media
+
+<!-- docker-compose run --rm api python3 manage.py collectstatic --noinput -->
+
+python3 manage.py collectstatic --noinput
+
+/root/app/saleor/static 271 unmodified
+
+## list nginx sites
+
+https://stackoverflow.com/questions/32400933/how-can-i-list-all-vhosts-in-nginx
+
+# s3
+
+[user](tuner-dev1)
+AKIA6AWICF26L4JPYV54
+hyF9hEKSPN7Xe/VuEKC2wTTBeeeypMi1PPqvy37K
+
+https://docs.saleor.io/docs/developer/running-saleor/s3
+https://github.com/adamchainz/django-cors-headers
+https://stackoverflow.com/questions/35760943/how-can-i-enable-cors-on-django-rest-framework
+https://testdriven.io/blog/storing-django-static-and-media-files-on-amazon-s3/
+
+https://github.com/mirumee/saleor/discussions/5715#discussioncomment-50598
+
+
+https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-allow-origin-works-d97d55946d9
+
+https://stackoverflow.com/questions/43262121/trying-to-use-fetch-and-pass-in-mode-no-cors
+
+
+

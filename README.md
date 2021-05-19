@@ -132,7 +132,7 @@ docker images
 docker ps
 
 > migration
-docker-compose run --rm api pip3 install pytimeparse
+<!-- docker-compose run --rm api pip3 install pytimeparse -->
 docker-compose run --rm api python3 manage.py migrate
 
 http://194.195.254.71:8000/graphql/

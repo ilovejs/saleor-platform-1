@@ -1,9 +1,14 @@
 #!/bin/sh
 
-export STOREFRONT_URL=http://194.195.252.175:3000/
-export DASHBOARD_URL=http://194.195.252.175:9000/
+# export STOREFRONT_URL=http://194.195.252.175:3000/
+# export DASHBOARD_URL=http://194.195.252.175:9000/
 # export ALLOWED_HOSTS=localhost,194.195.252.175,tuner.games,www.tuner.games
-export ALLOWED_HOSTS=*
+
+export STOREFRONT_URL=https://store.tuner.games/
+
+export DASHBOARD_URL=https://dashboard.tuner.games/
+
+export ALLOWED_HOSTS="*"
 
 ## db is internal name !!
 # export DATABASE_URL=postgres://saleor:saleor@db/saleor
@@ -15,6 +20,9 @@ export SECRET_KEY=MjM0c2FkZmFzZGZERkdERkcK
 
 export EMAIL_URL=smtp://mailhog:1025
 export DEFAULT_FROM_EMAIL=noreply@tuner.games
+
+export STATIC_URL=${STATIC_URL:-/static/}
+# SECRET_KEY=MjM0c2FkZmFzZGZERkdERkcK STATIC_URL=${STATIC_URL} python3 manage.py collectstatic --no-input
 
 # http://tuner.games:3000/
 # python3 manage.py runserver 0.0.0.0:3000
